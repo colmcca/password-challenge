@@ -2,10 +2,14 @@
 var generateBtn = document.querySelector("#generate");
 
 function generatePassword() {
+}
+// User selection prompts
+function passwordChoice () {
+  randomArray = [];
 var passwordLength = window.prompt("Please choose a number between 8 and 128 for your password length.");
 
 if (passwordLength < 8) {
-  alert("Your password lenght must be at least 8 digits.");
+  alert("Your password length must be at least 8 digits.");
   return "Please try again.";
 }
 
@@ -24,27 +28,29 @@ if (!passwordLength) {
 }
 
 if (confirm("Do you want your password to include lowercase letters?")) {
-  randomLower();
+  randomArray = randomArray.concat(lowerCase);
 }
 
 if (confirm("Do you want your password to include uppercase letters?")) {
-  randomUpper();
+  randomArray = randomArray.concat(upperCase);
 }
 
 if (confirm("Do you want your password to include numbers?")) {
-  randomNumber();
+  randomArray = randomArray.concat(numbers);
 }
 
 if (confirm("Do you want your password to include special characters?")) {
-  randomSymbol();
+  randomArray = randomArray.concat(symbols);
+}
+
+return true;
 }
 
 
-  return "This is your password"
-}
 
 // Write password to the #password input
 function writePassword() {
+  passwordChoice();
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
@@ -55,24 +61,11 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-// Random Generator Functions
+// variables
 
-function randomLower() {
- var lowerCase = "abcdefghijklmnopqrstuvwxyz";
- return lowerCase[Math.floor(Math.random() * lowerCase.length)]; 
-}
-
-function randomUpper() {
-  var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  return upperCase[Math.floor(Math.random() * upperCase.length)];
-}
-
-function randomNumber() {
-  var number = "0123456789";
-  return number[Math.floor(Math.random() * number.length)];
-}
-
-function randomSymbol() {
-  var symbol = " !'#$%&()*+,-./:;<=>?@[]^_`{|}~"
-  return number[Math.floor(Math.random() * symbol.length)];
-}
+var passwordLength = 120
+var lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var symbols = ["!", "#", "$", "%", "&", "(", ")", "*", "+", ",", "-", ".", "/",";", ":", "<", ">", "?", "@", "[", "]"];
+var randomArray = [];
